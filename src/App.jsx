@@ -4,6 +4,7 @@ import Inicio from './pages/inicio';
 import Contacto from './pages/contacto';
 import Blog from './pages/blog';
 import LayoutPublic from "./Layouts/LayoutPublic";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
 return <>
@@ -14,6 +15,7 @@ return <>
          <Route element={ <Contacto /> } path="/contacto"></Route> 
          <Route element={ <Blog /> } path="/blog"></Route>
       </Route>
+      <Route element={ <NotFound /> } path="*"></Route>
    </Routes>
 </>
 };
