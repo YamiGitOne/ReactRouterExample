@@ -12,7 +12,12 @@ const Blog = () =>{
         <ul className="list-group">
             {
                 data.map(item => (
-                    <Link className="list-group-item" to={'/blog/${item.id}'} key={item.id}>{item.id} - {item.title}</Link>
+                    <Link className="list-group-item" 
+                    to={`/blog/${item.id}`} 
+                    key={item.id}
+                    >
+                        {item.id} - {item.title}
+                        </Link>
                 ))
             }
         </ul>
