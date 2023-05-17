@@ -5,7 +5,6 @@ const Blog = () =>{
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-
     const {data, loading, error} = useFetch('https://jsonplaceholder.typicode.com/posts')
 
     if(loading) return <p>Loading data...</p>
@@ -13,10 +12,11 @@ const Blog = () =>{
 
     const handleChange = (e) => {
         let filter = e.target.value
-        setSearchParams({filter: filter});
-
-       // console.log(e.target.value);
-        //console.log("change");
+        if (filter) {
+            setSearchParams({ filter });
+          } else {
+            setSearchParams({});
+          }
     };
 
     return (
@@ -30,16 +30,21 @@ const Blog = () =>{
         className='form-control mb-2' />
 
         <ul className="list-group">
-            {
-                data.map(item => (
+            {data
+            .filter((item) => {
+            let filter = searchParams.get("filter");
+            if (!filter) return true;
+            let name = item.title.toLowerCase();
+            return name.startsWith(filter.toLowerCase());
+            })
+           .map(item => (
                     <Link className="list-group-item" 
                     to={`/blog/${item.id}`} 
                     key={item.id}
                     >
                         {item.id} - {item.title}
                         </Link>
-                ))
-            }
+                ))}
         </ul>
     </>
     );
